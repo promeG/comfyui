@@ -6,11 +6,11 @@ services:
     build:
       context: ./build
       args:
-        IMAGE_BASE: ${IMAGE_BASE:-ghcr.io/ai-dock/pytorch-2.2.0-py3.10-cuda-11.8.0-runtime-22.04}
+        IMAGE_BASE: ${IMAGE_BASE:-ghcr.io/ai-dock/pytorch:2.2.0-py3.10-cuda-11.8.0-runtime-22.04}
       tags:
-        - "ghcr.io/ai-dock/comfyui:pytorch-2.2.0-py3.10-cuda-11.8.0-runtime-22.04"
+        - "ghcr.io/ai-dock/comfyui:${IMAGE_TAG:-pytorch-2.2.0-py3.10-cuda-11.8.0-runtime-22.04}"
         
-    image: ghcr.io/ai-dock/comfyui:pytorch-2.2.0-py3.10-cuda-11.8.0-runtime-22.04
+    image: ghcr.io/ai-dock/comfyui:${IMAGE_TAG:-pytorch-2.2.0-py3.10-cuda-11.8.0-runtime-22.04}
     
     # For Nvidia GPU's - You probably want to uncomment this
     deploy:
@@ -29,9 +29,10 @@ services:
               
     volumes:
       ## Workspace
-      - ./workspace:${WORKSPACE:-/workspace/}:rshared
+      #- ./workspace:${WORKSPACE:-/workspace/}:rshared
       # You can share /workspace/storage with other non-ComfyUI containers. See README
       #- /path/to/common_storage:${WORKSPACE:-/workspace/}storage/:rshared
+      - ${HCT_WORKSPACE}:/opt/hct/:rshared
       
       # Will echo to root-owned authorized_keys file;
       # Avoids changing local file owner
@@ -76,4 +77,8 @@ services:
         - SYNCTHING_UI_PORT_HOST=${SYNCTHING_UI_PORT_HOST:-8384}
         - SYNCTHING_TRANSPORT_PORT_HOST=${SYNCTHING_TRANSPORT_PORT_HOST:-22999}
         - SYNCTHING_URL=${SYNCTHING_URL:-}
+        - HCT_PARAM1=${HCT_PARAM1:-}
+        - HCT_PARAM2=${HCT_PARAM2:-}
+        - HCT_WORKSPACE=${HCT_WORKSPACE:-}
+        - HCT_JOBID=${HCT_JOBID:-}
         #- PROVISIONING_SCRIPT=${PROVISIONING_SCRIPT:-}

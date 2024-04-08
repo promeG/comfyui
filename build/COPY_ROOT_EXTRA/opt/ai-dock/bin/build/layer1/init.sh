@@ -29,7 +29,7 @@ NODES=(
     "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
     "https://github.com/BlenderNeko/ComfyUI_TiledKSampler"
     "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet"
-    "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
+    "https://github.com/ltdrdata/ComfyUI-Impact-Pack"  #####
     "https://github.com/11cafe/comfyui-workspace-manager"
     "https://github.com/rgthree/rgthree-comfy"
     "https://github.com/LEv145/images-grid-comfy-plugin"
@@ -42,12 +42,12 @@ NODES=(
     "https://github.com/kijai/ComfyUI-KJNodes"
     "https://github.com/ltdrdata/ComfyUI-Inspire-Pack"
     "https://github.com/kijai/ComfyUI-Marigold"
-    "https://github.com/jags111/efficiency-nodes-comfyui"
+    "https://github.com/jags111/efficiency-nodes-comfyui"  ####
     "https://github.com/WASasquatch/was-node-suite-comfyui"
 
     # hct
-    "https://github.com/pythongosssss/ComfyUI-Custom-Scripts.git"
-    "https://github.com/Chaoses-Ib/ComfyScript.git"
+    "https://github.com/pythongosssss/ComfyUI-Custom-Scripts"
+    "https://github.com/Chaoses-Ib/ComfyScript"
 )
 
 CHECKPOINT_MODELS=(

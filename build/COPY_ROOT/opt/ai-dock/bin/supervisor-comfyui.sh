@@ -14,6 +14,10 @@ function cleanup() {
     wait -n
 }
 
+function hct_download() {
+    wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+}
+
 function start() {
     source /opt/ai-dock/etc/environment.sh
     if [[ ! -v COMFYUI_PORT || -z $COMFYUI_PORT ]]; then
@@ -78,13 +82,36 @@ function start() {
     FLAGS_COMBINED="${PLATFORM_FLAGS} ${BASE_FLAGS} $(cat /etc/comfyui_flags.conf)"
     printf "Starting %s...\n" "${SERVICE_NAME}"
 
-    cd /opt/ComfyUI && \
+    # hct
+    # hct_download "https://raw.githubusercontent.com/promeG/comfyui/main/comfy_script.py" "/opt/ComfyUI/custom_nodes/ComfyScript/"
+    # hct_download "https://hct-open.oss-cn-beijing.aliyuncs.com/input.jpg" "/opt/ComfyUI/input/"
+    printf ">>>>>>>>>>***********>>>>>>>>>>>>>++++++++++++++___________\n"
+
+    printf "xxxxxx.......HCT....  %s...%s\n" "${HCT_PARAM1}" "${HCT_PARAM2}"
+
+    mv /opt/ComfyUI/models/tag/* /opt/ComfyUI/custom_nodes/ComfyUI-WD14-Tagger/models/
+    ls -l /opt/ComfyUI/custom_nodes/ComfyUI-WD14-Tagger/models/
+    cp /opt/hct/input/input.jpg /opt/ComfyUI/input/input.jpg
+    cp /opt/hct/run.py /opt/ComfyUI/custom_nodes/ComfyScript/src/run.py
+    rm -rf /opt/ComfyUI/output/
+    ln -s /opt/hct/output /opt/ComfyUI/output
+
+    cd /opt/ComfyUI/custom_nodes/ComfyScript/src/ && \
+    # micromamba run -n comfyui pip install -e ".[default]" && \
     # elevate comfyui libs
     micromamba run -n comfyui \
         -e LD_PRELOAD=libtcmalloc.so \
         -e LD_LIBRARY_PATH=/opt/micromamba/envs/comfyui/lib:${LD_LIBRARY_PATH} \
-        python main.py \
-        ${FLAGS_COMBINED} --port ${LISTEN_PORT}
+        python run.py
+    # hct end
+
+    # cd /opt/ComfyUI && \
+    # # elevate comfyui libs
+    # micromamba run -n comfyui \
+    #     -e LD_PRELOAD=libtcmalloc.so \
+    #     -e LD_LIBRARY_PATH=/opt/micromamba/envs/comfyui/lib:${LD_LIBRARY_PATH} \
+    #     python main.py \
+    #     ${FLAGS_COMBINED} --port ${LISTEN_PORT}
 }
 
 start 2>&1
