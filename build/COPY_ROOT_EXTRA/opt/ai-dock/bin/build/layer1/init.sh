@@ -21,7 +21,6 @@ NODES=(
     "https://github.com/Fannovel16/comfyui_controlnet_aux"
     "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes.git"
     "https://github.com/alt-key-project/comfyui-dream-project"
-    "https://github.com/Chaoses-Ib/ComfyScript.git"
     "https://github.com/ltdrdata/ComfyUI-Manager.git"
     "https://github.com/ZHO-ZHO-ZHO/ComfyUI-Gemini"
     "https://github.com/AIGODLIKE/AIGODLIKE-ComfyUI-Translation"
@@ -45,6 +44,10 @@ NODES=(
     "https://github.com/kijai/ComfyUI-Marigold"
     "https://github.com/jags111/efficiency-nodes-comfyui"
     "https://github.com/WASasquatch/was-node-suite-comfyui"
+
+    # hct
+    "https://github.com/pythongosssss/ComfyUI-Custom-Scripts.git"
+    "https://github.com/Chaoses-Ib/ComfyScript.git"
 )
 
 CHECKPOINT_MODELS=(
